@@ -8,7 +8,7 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.random.Random
 
-class GameRepositoryImpl : GameRepository {
+object GameRepositoryImpl : GameRepository {
 
     private val MIN_SUM_VALUE = 2
     private val MIN_ANSWER_VALUE = 1
