@@ -2,7 +2,7 @@ package com.example.composition.domain.repository
 
 import com.example.composition.domain.entity.GameSettings
 import com.example.composition.domain.entity.Level
-import com.example.composition.domain.entity.Quastion
+import com.example.composition.domain.entity.Question
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.random.Random
@@ -12,7 +12,7 @@ object GameRepositoryImpl : GameRepository {
     const val MIN_SUM_VALUE = 2
     const val MIN_ANSWER_VALUE = 1
 
-    override fun generateQuastion(maxSumValue: Int, countOfOptions: Int): Quastion {
+    override fun generateQuastion(maxSumValue: Int, countOfOptions: Int): Question {
         val sum = Random.nextInt(MIN_SUM_VALUE, maxSumValue + 1)
         val visibleNumber = Random.nextInt(MIN_ANSWER_VALUE, sum)
         val options = HashSet<Int>()
@@ -23,7 +23,7 @@ object GameRepositoryImpl : GameRepository {
         while (options.size < countOfOptions){
             options.add(Random.nextInt(from,to))
         }
-        return Quastion(sum,visibleNumber,options.toList())
+        return Question(sum,visibleNumber,options.toList())
     }
 
     override fun getGameSettings(level: Level): GameSettings {
