@@ -2,7 +2,6 @@ package com.example.composition.domain.useCase
 
 import com.example.composition.domain.entity.GameSettings
 import com.example.composition.domain.entity.Level
-import com.example.composition.domain.entity.Quastion
 import com.example.composition.domain.repository.GameRepository
 
 class GetGameSettingsUseCase(private val repository: GameRepository) {
