@@ -16,14 +16,18 @@ import com.example.composition.domain.entity.GameSettings
 import com.example.composition.domain.entity.Level
 import com.example.composition.presentation.GameFinishedFragment
 import com.example.composition.presentation.GameViewModel
+import com.example.composition.presentation.GameViewModelFactory
 
 class GameFragment : Fragment() {
 
     private lateinit var level: Level
+    private val viewModelFactory by lazy {
+        GameViewModelFactory(requireActivity().application,level)
+    }
     private val viewModel by lazy {
         ViewModelProvider(
             this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+            viewModelFactory
         )[GameViewModel::class.java]
     }
 
@@ -59,8 +63,6 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
         setClickListenersToOptions()
-        viewModel.startGame(level)
-
     }
 
     private fun setClickListenersToOptions() {
@@ -98,7 +100,7 @@ class GameFragment : Fragment() {
         viewModel.gameResult.observe(viewLifecycleOwner) {
             launchGameFinishedFragment(it)
         }
-        viewModel.progressOfAnswers.observe(viewLifecycleOwner){
+        viewModel.progressOfAnswers.observe(viewLifecycleOwner) {
             binding.tvAnswersProgress.text = it
         }
     }
